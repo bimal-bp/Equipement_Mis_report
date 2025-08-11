@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Equipment Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .date-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .date-selector input {
+            padding: 8px;
+            font-size: 16px;
+        }
+        .equipment-section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .summary-section {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .summary-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .submit-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Daily Equipment Update</h1>
+        
+        <div class="date-selector">
+            <label for="update-date">Date: </label>
+            <input type="date" id="update-date" name="update-date" required>
+        </div>
+        
+        <!-- Dumpers Section -->
+        <div class="equipment-section">
+            <div class="section-title">Dumpers</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipment ID</th>
+                        <th>HMR Opening</th>
+                        <th>HMR Closing</th>
+                        <th>Total HMR</th>
+                        <th>KMR Opening</th>
+                        <th>KMR Closing</th>
+                        <th>Total KMR</th>
+                        <th>Diesel Issued (Liters)</th>
+                        <th>Tires Issued</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AP39UQ0097</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ0097" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ0097" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ0097"></td>
+                        <td><input type="number" name="tires_AP39UQ0097"></td>
+                        <td><input type="text" name="remarks_AP39UQ0097"></td>
+                    </tr>
+                    <!-- Repeat for all dumpers -->
+                    <tr>
+                        <td>AP39UQ0091</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ0091"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ0091"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ0091" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ0091"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ0091"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ0091" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ0091"></td>
+                        <td><input type="number" name="tires_AP39UQ0091"></td>
+                        <td><input type="text" name="remarks_AP39UQ0091"></td>
+                    </tr>
+                    <!-- Add remaining dumpers following the same pattern -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Excavators & Loaders Section -->
+        <div class="equipment-section">
+            <div class="section-title">Excavators & Loaders</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipment Name</th>
+                        <th>HMR Opening</th>
+                        <th>HMR Closing</th>
+                        <th>Total HMR</th>
+                        <th>KMR Opening</th>
+                        <th>KMR Closing</th>
+                        <th>Total KMR</th>
+                        <th>Diesel Issued (Liters)</th>
+                        <th>Tires Issued</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SDLG Loader 1 (L936H) – AP39NR9178</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39NR9178"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39NR9178"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39NR9178" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39NR9178"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39NR9178"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39NR9178" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39NR9178"></td>
+                        <td><input type="number" name="tires_AP39NR9178"></td>
+                        <td><input type="text" name="remarks_AP39NR9178"></td>
+                    </tr>
+                    <!-- Repeat for all excavators/loaders -->
+                    <tr>
+                        <td>SDLG Loader 2 (L936H) – AP39NR9179</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39NR9179"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39NR9179"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39NR9179" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39NR9179"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39NR9179"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39NR9179" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39NR9179"></td>
+                        <td><input type="number" name="tires_AP39NR9179"></td>
+                        <td><input type="text" name="remarks_AP39NR9179"></td>
+                    </tr>
+                    <!-- Add remaining excavators/loaders following the same pattern -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Summary Section -->
+        <div class="summary-section">
+            <div class="summary-title">Daily Summary</div>
+            
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px; margin-right: 20px;">
+                    <h3>Diesel Summary</h3>
+                    <table>
+                        <tr>
+                            <td>Opening Stock (Liters)</td>
+                            <td><input type="number" step="0.1" name="diesel_opening"></td>
+                        </tr>
+                        <tr>
+                            <td>Total Issued Today</td>
+                            <td><input type="number" step="0.1" name="diesel_issued_total" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>Closing Stock</td>
+                            <td><input type="number" step="0.1" name="diesel_closing"></td>
+                        </tr>
+                        <tr>
+                            <td>FTD Issued</td>
+                            <td><input type="number" step="0.1" name="diesel_ftd" readonly></td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div style="flex: 1; min-width: 300px;">
+                    <h3>Tire Summary</h3>
+                    <table>
+                        <tr>
+                            <td>Opening Stock</td>
+                            <td><input type="number" name="tire_opening"></td>
+                        </tr>
+                        <tr>
+                            <td>Total Issued Today</td>
+                            <td><input type="number" name="tire_issued_total" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>Closing Stock</td>
+                            <td><input type="number" name="tire_closing"></td>
+                        </tr>
+                        <tr>
+                            <td>FTD Issued</td>
+                            <td><input type="number" name="tire_ftd" readonly></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <button type="submit" class="submit-btn">Submit Daily Report</button>
+    </div>
+
+    <script>
+        // JavaScript to calculate totals automatically
+        document.addEventListener('DOMContentLoaded', function() {
+            // Calculate HMR and KMR totals when opening/closing values change
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.addEventListener('change', function() {
+                    const name = this.name;
+                    
+                    // Calculate HMR total
+                    if (name.startsWith('hmr_open_') || name.startsWith('hmr_close_')) {
+                        const baseName = name.split('_').slice(0, 3).join('_');
+                        const open = parseFloat(document.querySelector(`input[name="${baseName}_open"]`).value) || 0;
+                        const close = parseFloat(document.querySelector(`input[name="${baseName}_close"]`).value) || 0;
+                        const total = close - open;
+                        document.querySelector(`input[name="${baseName}_total"]`).value = total > 0 ? total.toFixed(1) : '';
+                    }
+                    
+                    // Calculate KMR total
+                    if (name.startsWith('kmr_open_') || name.startsWith('kmr_close_')) {
+                        const baseName = name.split('_').slice(0, 3).join('_');
+                        const open = parseFloat(document.querySelector(`input[name="${baseName}_open"]`).value) || 0;
+                        const close = parseFloat(document.querySelector(`input[name="${baseName}_close"]`).value) || 0;
+                        const total = close - open;
+                        document.querySelector(`input[name="${baseName}_total"]`).value = total > 0 ? total.toFixed(1) : '';
+                    }
+                    
+                    // Calculate total diesel issued
+                    if (name.startsWith('diesel_') && !name.includes('total')) {
+                        let total = 0;
+                        document.querySelectorAll('input[name^="diesel_"]').forEach(dieselInput => {
+                            if (!dieselInput.name.includes('total') && !dieselInput.name.includes('opening') && !dieselInput.name.includes('closing')) {
+                                total += parseFloat(dieselInput.value) || 0;
+                            }
+                        });
+                        document.querySelector('input[name="diesel_issued_total"]').value = total.toFixed(1);
+                    }
+                    
+                    // Calculate total tires issued
+                    if (name.startsWith('tires_') && !name.includes('total')) {
+                        let total = 0;
+                        document.querySelectorAll('input[name^="tires_"]').forEach(tireInput => {
+                            if (!tireInput.name.includes('total') && !tireInput.name.includes('opening') && !tireInput.name.includes('closing')) {
+                                total += parseFloat(tireInput.value) || 0;
+                            }
+                        });
+                        document.querySelector('input[name="tire_issued_total"]').value = total;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
