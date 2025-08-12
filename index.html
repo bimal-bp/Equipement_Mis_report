@@ -1,555 +1,519 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Equipment Maintenance Tracker</title>
- <style>
- :root {
- --primary: #2c3e50;
- --secondary: #3498db;
- --success: #28a745;
- --warning: #ffc107;
- --danger: #dc3545;
- --light: #f8f9fa;
- --dark: #343a40;
- }
- body {
- font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
- margin: 0;
- padding: 0;
- background-color: #f5f5f5;
- }
- .container {
- max-width: 1400px;
- margin: 0 auto;
- background: white;
- border-radius: 8px;
- box-shadow: 0 0 20px rgba(0,0,0,0.1);
- padding: 20px;
- position: relative;
- }
- h1, h2, h3 {
- color: var(--primary);
- text-align: center;
- }
- h1 {
- margin-bottom: 30px;
- padding-bottom: 15px;
- border-bottom: 2px solid var(--secondary);
- }
- .home-container {
- text-align: center;
- padding: 50px 20px;
- }
- .equipment-list {
- display: flex;
- flex-wrap: wrap;
- justify-content: center;
- gap: 30px;
- margin-top: 40px;
- }
- .equipment-card {
- background: white;
- border-radius: 8px;
- box-shadow: 0 4px 8px rgba(0,0,0,0.1);
- padding: 20px;
- width: 300px;
- transition: transform 0.3s;
- }
- .equipment-card:hover {
- transform translateY(-5px);
- }
- .card-header {
- background-color: var(--primary);
- color: white;
- padding: 10px;
- border-radius: 5px 5px 0 0;
- margin: -20px -20px 20px -20px;
- }
- .card-body {
- text-align: left;
- }
- .equipment-item {
- margin-bottom: 10px;
- padding-bottom: 10px;
- border-bottom: 1px solid #eee;
- }
- .main-btn {
- display: inline-block;
- margin-top: 30px;
- padding: 12px 24px;
- background-color: var(--secondary);
- color: white;
- text-decoration: none;
- border-radius: 4px;
- font-size: 18px;
- transition: background-color 0.3s;
- }
- .main-btn:hover {
- background-color: #2980b9;
- }
- .status-btn {
- display: inline-block;
- margin: 10px;
- padding: 10px 20px;
- color: white;
- text-decoration: none;
- border-radius: 4px;
- font-size: 16px;
- transition: background-color 0.3s;
- cursor: pointer;
- }
- .warning-btn {
- background-color: var(--warning);
- color: var(--dark);
- }
- .warning-btn:hover {
- background-color: #e0a800;
- }
- .mail-sent-btn {
- background-color: var(--danger);
- }
- .mail-sent-btn:hover {
- background-color: #c82333;
- }
- .controls {
- display: flex;
- justify-content: space-between;
- margin-bottom: 20px;
- flex-wrap: wrap;
- gap: 15px;
- }
- .search-box {
- flex: 1;
- min-width: 250px;
- }
- .filter-group {
- display: flex;
- gap: 15px;
- align-items: center;
- }
- select, input {
- padding: 8px 12px;
- border: 1px solid #ddd;
- border-radius: 4px;
- font-size: 14px;
- }
- button {
- padding: 8px 16px;
- background-color: var(--secondary);
- color: white;
- border: none;
- border-radius: 4px;
- cursor: pointer;
- transition: background-color 0.3s;
- }
- button:hover {
- background-color: #2980b9;
- }
- .floating-btn {
- position: fixed;
- bottom: 30px;
- right: 30px;
- width: 60px;
- height: 60px;
- border-radius: 50%;
- background-color: var(--secondary);
- color: white;
- font-size: 24px;
- display: flex;
- align-items: center;
- justify-content: center;
- cursor: pointer;
- box-shadow: 0 4px 8px rgba(0,0,0,0.2);
- z-index: 100;
- transition: all 0.3s;
- }
- .floating-btn:hover {
- background-color: #2980b9;
- transform: scale(1.1);
- }
- table {
- width: 100%;
- border-collapse: collapse;
- margin-top: 20px;
- }
- th, td {
- padding: 12px 15px;
- text-align: center;
- border: 1px solid #ddd;
- }
- th {
- background-color: var(--primary);
- color: white;
- position: sticky;
- top: 0;
- }
- .service-header {
- background-color: var(--secondary);
- color: white;
- }
- tr:nth-child(even) {
- background-color: #f2f2f2;
- }
- tr:hover {
- background-color: #e9e9e9;
- }
- .status-ok {
- background-color: var(--success);
- color: white;
- font-weight: bold;
- padding: 4px 8px;
- border-radius: 4px;
- }
- .status-warning {
- background-color: var(--warning);
- color: var(--dark);
- font-weight: bold;
- padding: 4px 8px;
- border-radius: 4px;
- }
- .status-action {
- background-color: var(--danger);
- color: white;
- font-weight: bold;
- padding: 4px 8px;
- border-radius: 4px;
- }
- .footer {
- margin-top: 30px;
- text-align: center;
- color: #666;
- font-size: 14px;
- }
- .back-btn {
- display: inline-block;
- margin-bottom: 20px;
- padding: 8px 16px;
- background-color: var(--primary);
- color: white;
- text-decoration: none;
- border-radius: 4px;
- }
- @media (max-width: 768px) {
- .controls {
- flex-direction: column;
- }
- table {
- display: block;
- overflow-x: auto;
- }
- .equipment-card {
- width: 100%;
- }
- }
- </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Equipment Update - <span id="title-date"></span></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: left;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .date-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .date-selector input {
+            padding: 8px;
+            font-size: 16px;
+        }
+        .equipment-section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .summary-section {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .summary-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .submit-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
- <!-- Home Page -->
- <div id="homePage" class="container home-container">
- <h1>Equipment Management System</h1>
- <h2>Equipment Status Summary</h2>
- <div class="equipment-list">
- <div class="equipment-card">
- <div class="card-header">
- <h3>Mail Sent Equipment</h3>
- </div>
- <div class="card-body" id="mailSentTippers">
- </div>
- </div>
- <div class="equipment-card">
- <div class="card-header">
- <h3>Warning Equipment</h3>
- </div>
- <div class="card-body" id="warningTippers">
- </div>
- </div>
- </div>
- <a href="#" class="main-btn" onclick="showMaintenancePage()">View Maintenance Schedule</a>
- <div class="footer">
- <p>© 2025 Equipment Management System</p>
- </div>
- </div>
- <!-- Maintenance Page (initially hidden) -->
- <div id="maintenancePage" class="container" style="display: none;">
- <a href="#" class="back-btn" onclick="showHomePage()">← Back to Home</a>
- <h1>Equipment Maintenance Tracker</h1>
- <div class="controls">
- <div class="search-box">
- <input type="text" id="searchInput" placeholder="Search equipment..." onkeyup="searchTable()">
- </div>
- <div class="filter-group">
- <select id="statusFilter" onchange="filterTable()">
- <option value="">All Status</option>
- <option value="ok">OK</option>
- <option value="warning">Warning</option>
- <option value="action">Action Required</option>
- </select>
- <select id="equipmentFilter" onchange="filterTable()">
- <option value="">All Equipment</option>
- <option value="Tipper">Tippers</option>
- <option value="Excavator">Excavators</option>
- <option value="Loader">Loaders</option>
- </select>
- <button onclick="exportToExcel()">Export to Excel</button>
- <button onclick="showHomePage()">Back to Home</button>
- </div>
- </div>
- <table id="maintenanceTable">
- <thead>
- <tr>
- <th rowspan="2">Equipment ID</th>
- <th rowspan="2">Type</th>
- <th rowspan="2">Current HMR</th>
- <th colspan="5" class="service-header">500 hr Service</th>
- <th colspan="5" class="service-header">1000 hr Service</th>
- <th colspan="5" class="service-header">2000 hr Service</th>
- </tr>
- <tr>
- <!-- 500 hr sub-headers -->
- <th class="service-header">Previous</th>
- <th class="service-header">Last Date</th>
- <th class="service-header">Next Due</th>
- <th class="service-header">HMR Left</th>
- <th class="service-header">Status</th>
- <!-- 1000 hr sub-headers -->
- <th class="service-header">Previous</th>
- <th class="service-header">Last Date</th>
- <th class="service-header">Next Due</th>
- <th class="service-header">HMR Left</th>
- <th class="service-header">Status</th>
- <!-- 2000 hr sub-headers -->
- <th class="service-header">Previous</th>
- <th class="service-header">Last Date</th>
- <th class="service-header">Next Due</th>
- <th class="service-header">HMR Left</th>
- <th class="service-header">Status</th>
- </tr>
- </thead>
- <tbody>
- <!-- Sample Data for Tippers -->
- <tr>
- <td>AP39UQ0097</td>
- <td>Tipper</td>
- <td>5145</td>
- <!-- 500 hr data -->
- <td>5106</td>
- <td>2024-05-15</td>
- <td>5606</td>
- <td>461</td>
- <td><span class="status-ok">OK</span></td>
- <!-- 1000 hr data -->
- <td>5146</td>
- <td>2024-04-10</td>
- <td>6146</td>
- <td>1001</td>
- <td><span class="status-ok">OK</span></td>
- <!-- 2000 hr data -->
- <td>4105</td>
- <td>2024-03-01</td>
- <td>6105</td>
- <td>960</td>
- <td><span class="status-ok">OK</span></td>
- </tr>
- <tr>
- <td>AP39UQ0095</td>
- <td>Tipper</td>
- <td>3527</td>
- <!-- 500 hr data -->
- <td>3097</td>
- <td>2024-06-01</td>
- <td>3597</td>
- <td>70</td>
- <td><span class="status-action">Mail Sent</span></td>
- <!-- 1000 hr data -->
- <td>3095</td>
- <td>2024-05-20</td>
- <td>4095</td>
- <td>568</td>
- <td><span class="status-ok">OK</span></td>
- <!-- 2000 hr data -->
- <td>2152</td>
- <td>2024-02-15</td>
- <td>4152</td>
- <td>625</td>
- <td><span class="status-ok">OK</span></td>
- </tr>
- <!-- Sample Data for Excavators/Loaders -->
- <tr>
- <td>AP39OQ9026</td>
- <td>Loader</td>
- <td>2944</td>
- <!-- 500 hr data -->
- <td>2569</td>
- <td>2024-05-25</td>
- <td>3069</td>
- <td>125</td>
- <td><span class="status-warning">Warning</span></td>
- <!-- 1000 hr data -->
- <td>2088</td>
- <td>2024-04-05</td>
- <td>3088</td>
- <td>144</td>
- <td><span class="status-warning">Warning</span></td>
- <!-- 2000 hr data -->
- <td>2132</td>
- <td>2024-01-10</td>
- <td>4132</td>
- <td>1188</td>
- <td><span class="status-ok">OK</span></td>
- </tr>
- <tr>
- <td>312126</td>
- <td>Excavator</td>
- <td>1849</td>
- <!-- 500 hr data -->
- <td>1530</td>
- <td>2024-06-05</td>
- <td>2030</td>
- <td>181</td>
- <td><span class="status-ok">OK</span></td>
- <!-- 1000 hr data -->
- <td>1011</td>
- <td>2024-05-10</td>
- <td>2011</td>
- <td>162</td>
- <td><span class="status-ok">OK</span></td>
- <!-- 2000 hr data -->
- <td>0</td>
- <td>-</td>
- <td>2000</td>
- <td>151</td>
- <td><span class="status-ok">OK</span></td>
- </tr>
- </tbody>
- </table>
- <div class="footer">
- <p>Last Updated: <span id="lastUpdated">2025-08-11 16:11:00</span></p>
- <p>© 2025 Equipment Management System</p>
- </div>
- </div>
- <!-- Floating action button -->
- <div id="floatingBtn" class="floating-btn" onclick="showHomePage()" style="display: none;">
- <i class="fas fa-home"></i>
- </div>
- <!-- Font Awesome for icons -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
- <script>
- // Page navigation functions
- function showMaintenancePage() {
- document.getElementById('homePage').style.display = 'none';
- document.getElementById('maintenancePage').style.display = 'block';
- document.getElementById('floatingBtn').style.display = 'flex';
- filterTable();
- }
- function showHomePage() {
- document.getElementById('homePage').style.display = 'block';
- document.getElementById('maintenancePage').style.display = 'none';
- document.getElementById('floatingBtn').style.display = 'none';
- updateHomePage();
- }
- // Update homepage with Mail Sent and Warning Equipment
- function updateHomePage() {
- const table = document.getElementById("maintenanceTable");
- const tr = table.getElementsByTagName("tr");
- const mailSentTippers = document.getElementById("mailSentTippers");
- const warningTippers = document.getElementById("warningTippers");
- mailSentTippers.innerHTML = "";
- warningTippers.innerHTML = "";
- for (let i = 2; i < tr.length; i++) {
- const cells = tr[i].cells;
- const equipmentType = cells[1].textContent;
- const equipmentId = cells[0].textContent;
- if (equipmentType !== "Tipper" && equipmentId !== "AP39OQ9026") continue;
- const statusCells = [
- cells[7], // 500hr status
- cells[12], // 1000hr status
- cells[17] // 2000hr status
- ];
- for (const cell of statusCells) {
- const status = cell.textContent.toLowerCase();
- if (status.includes("mail sent")) {
- const btn = document.createElement("a");
- btn.className = "status-btn mail-sent-btn";
- btn.textContent = `Mail Sent: ${equipmentId}`;
- mailSentTippers.appendChild(btn);
- } else if (status.includes("warning")) {
- const btn = document.createElement("a");
- btn.className = "status-btn warning-btn";
- btn.textContent = `Warning: ${equipmentId}`;
- warningTippers.appendChild(btn);
- }
- }
- }
- if (mailSentTippers.children.length === 0) {
- const p = document.createElement("p");
- p.className = "equipment-item";
- p.textContent = "No Equipment with Mail Sent status";
- mailSentTippers.appendChild(p);
- }
- if (warningTippers.children.length === 0) {
- const p = document.createElement("p");
- p.className = "equipment-item";
- p.textContent = "No Equipment with Warning status";
- warningTippers.appendChild(p);
- }
- }
- // Table functions
- function searchTable() {
- const input = document.getElementById("searchInput");
- const filter = input.value.toUpperCase();
- const table = document.getElementById("maintenanceTable");
- const tr = table.getElementsByTagName("tr");
- for (let i = 2; i < tr.length; i++) {
- let found = false;
- const td = tr[i].getElementsByTagName("td");
- for (let j = 0; j < td.length; j++) {
- if (td[j]) {
- const txtValue = td[j].textContent || td[j].innerText;
- if (txtValue.toUpperCase().indexOf(filter) > -1) {
- found = true;
- break;
- }
- }
- }
- tr[i].style.display = found ? "" : "none";
- }
- }
- function filterTable() {
- const statusFilter = document.getElementById("statusFilter").value;
- const equipmentFilter = document.getElementById("equipmentFilter").value;
- const table = document.getElementById("maintenanceTable");
- const tr = table.getElementsByTagName("tr");
- for (let i = 2; i < tr.length; i++) {
- const statusCells = [
- tr[i].cells[7], // 500hr status
- tr[i].cells[12], // 1000hr status
- tr[i].cells[17] // 2000hr status
- ];
- const equipmentType = tr[i].cells[1].textContent;
- let statusMatch = false;
- let equipmentMatch = equipmentFilter === "" || equipmentType === equipmentFilter;
- if (statusFilter === "") {
- statusMatch = true;
- } else {
- for (const cell of statusCells) {
- if (cell.textContent.toLowerCase().includes(statusFilter)) {
- statusMatch = true;
- break;
- }
- }
- }
- tr[i].style.display = (statusMatch && equipmentMatch) ? "" : "none";
- }
- }
- function exportToExcel() {
- alert("Exporting data to Excel...");
- }
- // Initialize the page
- document.addEventListener('DOMContentLoaded', function() {
- showHomePage();
- });
- </script>
+    <div class="container">
+        <h1>Daily Equipment Update - <span id="header-date"></span></h1>
+        
+        <div class="date-selector">
+            <label for="update-date">Date: </label>
+            <input type="date" id="update-date" name="update-date" required>
+        </div>
+        
+        <!-- Dumpers Section -->
+        <div class="equipment-section">
+            <div class="section-title">Dumpers</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipment ID</th>
+                        <th>HMR Opening</th>
+                        <th>HMR Closing</th>
+                        <th>Total HMR</th>
+                        <th>KMR Opening</th>
+                        <th>KMR Closing</th>
+                        <th>Total KMR</th>
+                        <th>Diesel Issued (Liters)</th>
+                        <th>Tires Issued</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AP39UQ0097</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ0097" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ0097" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ0097"></td>
+                        <td><input type="number" name="tires_AP39UQ0097"></td>
+                        <td><input type="text" name="remarks_AP39UQ0097"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39UQ0091</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ0091"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ0091"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ0091" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ0091"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ0091"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ0091" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ0091"></td>
+                        <td><input type="number" name="tires_AP39UQ0091"></td>
+                        <td><input type="text" name="remarks_AP39UQ0091"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39UQ0095</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ0095"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ0095"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ0095" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ0095"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ0095"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ0095" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ0095"></td>
+                        <td><input type="number" name="tires_AP39UQ0095"></td>
+                        <td><input type="text" name="remarks_AP39UQ0095"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39UQ0093</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ0093"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ0093"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ0093" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ0093"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ0093"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ0093" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ0093"></td>
+                        <td><input type="number" name="tires_AP39UQ0093"></td>
+                        <td><input type="text" name="remarks_AP39UQ0093"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39UQ0099</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ0099"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ0099"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ0099" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ0099"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ0099"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ0099" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ0099"></td>
+                        <td><input type="number" name="tires_AP39UQ0099"></td>
+                        <td><input type="text" name="remarks_AP39UQ0099"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39UQ4625</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ4625"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ4625"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ4625" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ4625"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ4625"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ4625" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ4625"></td>
+                        <td><input type="number" name="tires_AP39UQ4625"></td>
+                        <td><input type="text" name="remarks_AP39UQ4625"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39UQ4624</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ4624"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ4624"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ4624" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ4624"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ4624"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ4624" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ4624"></td>
+                        <td><input type="number" name="tires_AP39UQ4624"></td>
+                        <td><input type="text" name="remarks_AP39UQ4624"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39UQ4623</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ4623"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ4623"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ4623" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ4623"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ4623"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ4623" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ4623"></td>
+                        <td><input type="number" name="tires_AP39UQ4623"></td>
+                        <td><input type="text" name="remarks_AP39UQ4623"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39UQ0096</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ0096"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ0096"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ0096" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ0096"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ0096"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ0096" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ0096"></td>
+                        <td><input type="number" name="tires_AP39UQ0096"></td>
+                        <td><input type="text" name="remarks_AP39UQ0096"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39UQ0094</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ0094"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ0094"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ0094" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ0094"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ0094"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ0094" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39UQ0094"></td>
+                        <td><input type="number" name="tires_AP39UQ0094"></td>
+                        <td><input type="text" name="remarks_AP39UQ0094"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39WC2928</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39WC2928"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39WC2928"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39WC2928" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39WC2928"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39WC2928"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39WC2928" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39WC2928"></td>
+                        <td><input type="number" name="tires_AP39WC2928"></td>
+                        <td><input type="text" name="remarks_AP39WC2928"></td>
+                    </tr>
+                    <tr>
+                        <td>AP39WF2057</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39WF2057"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39WF2057"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39WF2057" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39WF2057"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39WF2057"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39WF2057" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39WF2057"></td>
+                        <td><input type="number" name="tires_AP39WF2057"></td>
+                        <td><input type="text" name="remarks_AP39WF2057"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Excavators & Loaders Section -->
+        <div class="equipment-section">
+            <div class="section-title">Excavators & Loaders</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipment Name</th>
+                        <th>HMR Opening</th>
+                        <th>HMR Closing</th>
+                        <th>Total HMR</th>
+                        <th>KMR Opening</th>
+                        <th>KMR Closing</th>
+                        <th>Total KMR</th>
+                        <th>Diesel Issued (Liters)</th>
+                        <th>Tires Issued</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SDLG Loader 1 (L936H) – AP39NR9178</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39NR9178"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39NR9178"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39NR9178" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39NR9178"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39NR9178"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39NR9178" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39NR9178"></td>
+                        <td><input type="number" name="tires_AP39NR9178"></td>
+                        <td><input type="text" name="remarks_AP39NR9178"></td>
+                    </tr>
+                    <tr>
+                        <td>SDLG Loader 2 (L936H) – AP39NR9179</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39NR9179"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39NR9179"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39NR9179" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39NR9179"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39NR9179"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39NR9179" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_AP39NR9179"></td>
+                        <td><input type="number" name="tires_AP39NR9179"></td>
+                        <td><input type="text" name="remarks_AP39NR9179"></td>
+                    </tr>
+                    <tr>
+                        <td>Volvo Excavator EC210D OLD – SL NO. 253178</td>
+                        <td><input type="number" step="0.1" name="hmr_open_253178"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_253178"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_253178" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_253178"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_253178"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_253178" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_253178"></td>
+                        <td><input type="number" name="tires_253178"></td>
+                        <td><input type="text" name="remarks_253178"></td>
+                    </tr>
+                    <tr>
+                        <td>Volvo Excavator EC210DL NEW – SL NO. 312126</td>
+                        <td><input type="number" step="0.1" name="hmr_open_312126"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_312126"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_312126" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_312126"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_312126"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_312126" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_312126"></td>
+                        <td><input type="number" name="tires_312126"></td>
+                        <td><input type="text" name="remarks_312126"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Summary Section -->
+        <div class="summary-section">
+            <div class="summary-title">Daily Summary</div>
+            
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px; margin-right: 20px;">
+                    <h3>Diesel Summary</h3>
+                    <table>
+                        <tr>
+                            <td>Opening Stock (Liters)</td>
+                            <td><input type="number" step="0.1" name="diesel_opening"></td>
+                        </tr>
+                        <tr>
+                            <td>Total Issued Today</td>
+                            <td><input type="number" step="0.1" name="diesel_issued_total" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>Closing Stock</td>
+                            <td><input type="number" step="0.1" name="diesel_closing" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>FTD Issued</td>
+                            <td><input type="number" step="0.1" name="diesel_ftd" readonly></td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div style="flex: 1; min-width: 300px;">
+                    <h3>Tire Summary</h3>
+                    <table>
+                        <tr>
+                            <td>Opening Stock</td>
+                            <td><input type="number" name="tire_opening"></td>
+                        </tr>
+                        <tr>
+                            <td>Total Issued Today</td>
+                            <td><input type="number" name="tire_issued_total" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>Closing Stock</td>
+                            <td><input type="number" name="tire_closing" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>FTD Issued</td>
+                            <td><input type="number" name="tire_ftd" readonly></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <button type="button" class="submit-btn" onclick="submitReport()">Submit Daily Report</button>
+    </div>
+    <script>
+        // Update title and header with selected date
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.querySelector('#update-date');
+            const titleDate = document.querySelector('#title-date');
+            const headerDate = document.querySelector('#header-date');
+            
+            dateInput.addEventListener('change', function() {
+                const selectedDate = dateInput.value;
+                titleDate.textContent = selectedDate;
+                headerDate.textContent = selectedDate;
+                document.title = `Daily Equipment Update - ${selectedDate}`;
+            });
+            
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+            titleDate.textContent = today;
+            headerDate.textContent = today;
+            document.title = `Daily Equipment Update - ${today}`;
+            
+            // Calculate HMR, KMR, diesel, and tire totals
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.addEventListener('input', function() {
+                    const name = this.name;
+                    // Calculate HMR total
+                    if (name.startsWith('hmr_open_') || name.startsWith('hmr_close_')) {
+                        const baseName = name.replace('hmr_open_', '').replace('hmr_close_', '');
+                        const open = parseFloat(document.querySelector(`input[name="hmr_open_${baseName}"]`).value) || 0;
+                        const close = parseFloat(document.querySelector(`input[name="hmr_close_${baseName}"]`).value) || 0;
+                        const total = close - open;
+                        document.querySelector(`input[name="hmr_total_${baseName}"]`).value = total >= 0 ? total.toFixed(1) : '';
+                    }
+                    // Calculate KMR total
+                    if (name.startsWith('kmr_open_') || name.startsWith('kmr_close_')) {
+                        const baseName = name.replace('kmr_open_', '').replace('kmr_close_', '');
+                        const open = parseFloat(document.querySelector(`input[name="kmr_open_${baseName}"]`).value) || 0;
+                        const close = parseFloat(document.querySelector(`input[name="kmr_close_${baseName}"]`).value) || 0;
+                        const total = close - open;
+                        document.querySelector(`input[name="kmr_total_${baseName}"]`).value = total >= 0 ? total.toFixed(1) : '';
+                    }
+                    // Calculate total diesel issued
+                    if (name.startsWith('diesel_') && !name.includes('total') && !name.includes('opening') && !name.includes('closing') && !name.includes('ftd')) {
+                        let total = 0;
+                        document.querySelectorAll('input[name^="diesel_"]').forEach(dieselInput => {
+                            if (!dieselInput.name.includes('total') && !dieselInput.name.includes('opening') && !dieselInput.name.includes('closing') && !dieselInput.name.includes('ftd')) {
+                                total += parseFloat(dieselInput.value) || 0;
+                            }
+                        });
+                        document.querySelector('input[name="diesel_issued_total"]').value = total.toFixed(1);
+                        // Update diesel closing stock
+                        const dieselOpening = parseFloat(document.querySelector('input[name="diesel_opening"]').value) || 0;
+                        document.querySelector('input[name="diesel_closing"]').value = (dieselOpening - total).toFixed(1);
+                        document.querySelector('input[name="diesel_ftd"]').value = total.toFixed(1);
+                    }
+                    // Calculate total tires issued
+                    if (name.startsWith('tires_') && !name.includes('total') && !name.includes('opening') && !name.includes('closing') && !name.includes('ftd')) {
+                        let total = 0;
+                        document.querySelectorAll('input[name^="tires_"]').forEach(tireInput => {
+                            if (!tireInput.name.includes('total') && !tireInput.name.includes('opening') && !tireInput.name.includes('closing') && !tireInput.name.includes('ftd')) {
+                                total += parseInt(tireInput.value) || 0;
+                            }
+                        });
+                        document.querySelector('input[name="tire_issued_total"]').value = total;
+                        // Update tire closing stock
+                        const tireOpening = parseInt(document.querySelector('input[name="tire_opening"]').value) || 0;
+                        document.querySelector('input[name="tire_closing"]').value = tireOpening - total;
+                        document.querySelector('input[name="tire_ftd"]').value = total;
+                    }
+                });
+            });
+        });
+
+        // Submit function
+        function submitReport() {
+            const date = document.querySelector('#update-date').value;
+            if (!date) {
+                alert('Please select a date.');
+                return;
+            }
+            // Collect all form data
+            const formData = {
+                date: date,
+                equipment: [],
+                diesel_summary: {
+                    opening: parseFloat(document.querySelector('input[name="diesel_opening"]').value) || 0,
+                    issued_total: parseFloat(document.querySelector('input[name="diesel_issued_total"]').value) || 0,
+                    closing: parseFloat(document.querySelector('input[name="diesel_closing"]').value) || 0,
+                    ftd: parseFloat(document.querySelector('input[name="diesel_ftd"]').value) || 0
+                },
+                tire_summary: {
+                    opening: parseInt(document.querySelector('input[name="tire_opening"]').value) || 0,
+                    issued_total: parseInt(document.querySelector('input[name="tire_issued_total"]').value) || 0,
+                    closing: parseInt(document.querySelector('input[name="tire_closing"]').value) || 0,
+                    ftd: parseInt(document.querySelector('input[name="tire_ftd"]').value) || 0
+                }
+            };
+            // Collect equipment data
+            document.querySelectorAll('.equipment-section table tbody tr').forEach(row => {
+                const id = row.cells[0].textContent;
+                const nameParts = id.split(' – ');
+                const baseId = nameParts.length > 1 ? nameParts[1] : id;
+                const data = {
+                    id: id,
+                    hmr_open: parseFloat(row.querySelector(`input[name="hmr_open_${baseId}"]`).value) || 0,
+                    hmr_close: parseFloat(row.querySelector(`input[name="hmr_close_${baseId}"]`).value) || 0,
+                    hmr_total: parseFloat(row.querySelector(`input[name="hmr_total_${baseId}"]`).value) || 0,
+                    kmr_open: parseFloat(row.querySelector(`input[name="kmr_open_${baseId}"]`).value) || 0,
+                    kmr_close: parseFloat(row.querySelector(`input[name="kmr_close_${baseId}"]`).value) || 0,
+                    kmr_total: parseFloat(row.querySelector(`input[name="kmr_total_${baseId}"]`).value) || 0,
+                    diesel: parseFloat(row.querySelector(`input[name="diesel_${baseId}"]`).value) || 0,
+                    tires: parseInt(row.querySelector(`input[name="tires_${baseId}"]`).value) || 0,
+                    remarks: row.querySelector(`input[name="remarks_${baseId}"]`).value || ''
+                };
+                formData.equipment.push(data);
+            });
+            console.log('Form Data:', formData);
+            alert('Report submitted successfully!');
+            // Add actual submission logic here (e.g., send to server via fetch)
+        }
+    </script>
 </body>
 </html>
