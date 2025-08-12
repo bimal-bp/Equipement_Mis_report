@@ -76,7 +76,7 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
-        .submit-btn, .mis-report-btn {
+        .submit-btn {
             display: block;
             width: 200px;
             margin: 30px auto 0;
@@ -87,25 +87,49 @@
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
-            text-align: center;
-            text-decoration: none;
         }
-        .submit-btn:hover, .mis-report-btn:hover {
+        .submit-btn:hover {
             background-color: #45a049;
         }
         .status-section {
-            background-color: #f0f8ff;
+            background-color: #f8f9fa;
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 20px;
+            border: 1px solid #dee2e6;
         }
-        .status-title {
-            font-weight: bold;
-            margin-bottom: 10px;
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        .status-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .status-card h3 {
+            margin-top: 0;
             color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
         }
         .status-item {
-            margin: 5px 0;
+            margin-bottom: 8px;
+        }
+        .breakdown-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .breakdown-btn:hover {
+            background-color: #c0392b;
         }
     </style>
 </head>
@@ -113,20 +137,33 @@
     <div class="container">
         <h1>Daily Equipment Update - <span id="header-date"></span></h1>
         
-        <!-- Current Status Section -->
+        <!-- Status Section -->
         <div class="status-section">
-            <div class="status-title">Current Status</div>
-            <div class="status-item">Current Diesel Stock: 12,500 Liters</div>
-            <div class="status-item">Last Refill: 2025-08-10</div>
-            <div class="status-item">Total Tires in Stock: 8</div>
-            <div class="status-item">Equipment in Breakdown: 2 Tippers, 1 Loader</div>
+            <h2>Current Equipment Status</h2>
+            <div class="status-grid">
+                <div class="status-card">
+                    <h3>Fuel Status</h3>
+                    <div class="status-item">Current Stock (Liters): <strong>12,500</strong></div>
+                    <div class="status-item">Last Refill: <strong>2025-08-10</strong></div>
+                </div>
+                <div class="status-card">
+                    <h3>Tire Status</h3>
+                    <div class="status-item">Total Tires in Stock: <strong>8</strong></div>
+                </div>
+                <div class="status-card">
+                    <h3>Breakdown Status</h3>
+                    <div class="status-item">2 Tippers - Currently in Breakdown</div>
+                    <div class="status-item">1 Loader - Currently in Breakdown</div>
+                    <button class="breakdown-btn" onclick="viewBreakdownReport()">View MIS Report</button>
+                </div>
+            </div>
         </div>
-        
+
         <div class="date-selector">
             <label for="update-date">Date: </label>
             <input type="date" id="update-date" name="update-date" required>
         </div>
-        
+
         <!-- Dumpers Section -->
         <div class="equipment-section">
             <div class="section-title">Dumpers</div>
@@ -293,7 +330,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <!-- Excavators & Loaders Section -->
         <div class="equipment-section">
             <div class="section-title">Excavators & Loaders</div>
@@ -364,18 +401,18 @@
                 </tbody>
             </table>
         </div>
-        
+
         <!-- Summary Section -->
         <div class="summary-section">
             <div class="summary-title">Daily Summary</div>
-            
+
             <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
                 <div style="flex: 1; min-width: 300px; margin-right: 20px;">
                     <h3>Diesel Summary</h3>
                     <table>
                         <tr>
                             <td>Opening Stock (Liters)</td>
-                            <td><input type="number" step="0.1" name="diesel_opening" value="12500"></td>
+                            <td><input type="number" step="0.1" name="diesel_opening"></td>
                         </tr>
                         <tr>
                             <td>Total Issued Today</td>
@@ -391,13 +428,13 @@
                         </tr>
                     </table>
                 </div>
-                
+
                 <div style="flex: 1; min-width: 300px;">
                     <h3>Tire Summary</h3>
                     <table>
                         <tr>
                             <td>Opening Stock</td>
-                            <td><input type="number" name="tire_opening" value="8"></td>
+                            <td><input type="number" name="tire_opening"></td>
                         </tr>
                         <tr>
                             <td>Total Issued Today</td>
@@ -415,9 +452,8 @@
                 </div>
             </div>
         </div>
-        
+
         <button type="button" class="submit-btn" onclick="submitReport()">Submit Daily Report</button>
-        <a href="mis-report.html" class="mis-report-btn">View MIS Report</a>
     </div>
     <script>
         // Update title and header with selected date
@@ -491,6 +527,7 @@
                 });
             });
         });
+
         // Submit function
         function submitReport() {
             const date = document.querySelector('#update-date').value;
@@ -537,6 +574,13 @@
             console.log('Form Data:', formData);
             alert('Report submitted successfully!');
             // Add actual submission logic here (e.g., send to server via fetch)
+        }
+
+        // View Breakdown Report function
+        function viewBreakdownReport() {
+            alert('Opening MIS Report for equipment breakdowns...');
+            // Add actual logic to open/show the MIS report here
+            // This could redirect to another page or open a modal with the report
         }
     </script>
 </body>
