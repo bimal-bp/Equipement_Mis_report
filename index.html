@@ -24,15 +24,6 @@
  color: #333;
  margin-bottom: 30px;
  }
- .date-selector {
- display: flex;
- justify-content: center;
- margin-bottom: 20px;
- }
- .date-selector input {
- padding: 8px;
- font-size: 16px;
- }
  .equipment-section {
  margin-bottom: 30px;
  }
@@ -92,31 +83,78 @@
  background-color: #45a049;
  }
  .status-section {
- background-color: #f8f9fa;
- padding: 15px;
- border-radius: 5px;
+ background: linear-gradient(135deg, #2c3e50, #34495e);
+ padding: 20px;
+ border-radius: 10px;
  margin-bottom: 20px;
  border: 1px solid #dee2e6;
+ color: white;
+ position: relative;
+ overflow: hidden;
+ }
+ .status-section::before {
+ content: '';
+ position: absolute;
+ top: -50%;
+ left: -50%;
+ width: 200%;
+ height: 200%;
+ background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+ transform: rotate(45deg);
+ }
+ .status-section h2 {
+ font-size: 24px;
+ margin-bottom: 20px;
+ text-transform: uppercase;
+ letter-spacing: 1px;
+ text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
  }
  .status-grid {
  display: grid;
  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
- gap: 15px;
+ gap: 20px;
  }
  .status-card {
- background-color: white;
- padding: 15px;
- border-radius: 5px;
- box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+ background: rgba(255,255,255,0.95);
+ padding: 20px;
+ border-radius: 10px;
+ box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+ transition: transform 0.3s ease, box-shadow 0.3s ease;
+ position: relative;
+ overflow: hidden;
+ }
+ .status-card:hover {
+ transform: translateY(-5px);
+ box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+ }
+ .status-card::before {
+ content: '';
+ position: absolute;
+ top: 0;
+ left: -100%;
+ width: 100%;
+ height: 100%;
+ background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+ transition: 0.5s;
+ }
+ .status-card:hover::before {
+ left: 100%;
  }
  .status-card h3 {
  margin-top: 0;
  color: #2c3e50;
- border-bottom: 1px solid #eee;
+ border-bottom: 2px solid #3498db;
  padding-bottom: 10px;
+ font-size: 20px;
  }
  .status-item {
- margin-bottom: 8px;
+ margin-bottom: 12px;
+ font-size: 16px;
+ color: #333;
+ }
+ .status-item strong {
+ color: #e74c3c;
+ font-weight: 600;
  }
  .breakdown-btn {
  background-color: #e74c3c;
@@ -127,17 +165,40 @@
  cursor: pointer;
  font-size: 14px;
  margin-top: 10px;
+ transition: background-color 0.3s ease;
  }
  .breakdown-btn:hover {
  background-color: #c0392b;
+ }
+ .propeller {
+ position: absolute;
+ width: 50px;
+ height: 50px;
+ background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2z"/><path d="M12 6v6l4 2"/></svg>') center/cover no-repeat;
+ animation: spin 4s linear infinite;
+ opacity: 0.3;
+ }
+ .propeller.top-left {
+ top: 20px;
+ left: 20px;
+ }
+ .propeller.bottom-right {
+ bottom: 20px;
+ right: 20px;
+ }
+ @keyframes spin {
+ 0% { transform: rotate(0deg); }
+ 100% { transform: rotate(360deg); }
  }
  </style>
 </head>
 <body>
  <div class="container">
- <h1>Daily Equipment Update - <span id="header-date"></span></h1>
+ <h1>Daily Equipment Update</h1>
  <!-- Status Section -->
  <div class="status-section">
+ <div class="propeller top-left"></div>
+ <div class="propeller bottom-right"></div>
  <h2>Current Equipment Status</h2>
  <div class="status-grid">
  <div class="status-card">
@@ -152,14 +213,10 @@
  <div class="status-card">
  <h3>Breakdown Status</h3>
  <div class="status-item">1 Tipper - in Breakdown</div>
- <div class="status-item">1 Tipper - Under Maintenance </div>
+ <div class="status-item">1 Tipper - Under Maintenance</div>
  <div class="status-item">1 Loader - Currently in Breakdown</div>
  </div>
  </div>
- </div>
- <div class="date-selector">
- <label for="update-date">Date: </label>
- <input type="date" id="update-date" name="update-date" required>
  </div>
  <!-- Dumpers Section -->
  <div class="equipment-section">
@@ -394,7 +451,7 @@
  <td><input type="number" name="tires_312126"></td>
  <td><input type="text" name="remarks_312126"></td>
  </tr>
- </ thead>
+ </tbody>
  </table>
  </div>
  <!-- Summary Section -->
@@ -448,180 +505,126 @@
  <button type="button" class="submit-btn" onclick="submitReport()">Submit Daily Report</button>
  </div>
  <script>
- // Update title and header with selected date
- document.addEventListener('DOMContentLoaded', function() {
-     const dateInput = document.querySelector('#update-date');
-     const headerDate = document.querySelector('#header-date');
-
-     // Set default date to today
-     const today = new Date().toISOString().split('T')[0];
-     dateInput.value = today;
-     headerDate.textContent = today;
-     document.title = `Daily Equipment Update - ${today}`;
-
-     dateInput.addEventListener('change', function() {
-         const selectedDate = dateInput.value;
-         headerDate.textContent = selectedDate;
-         document.title = `Daily Equipment Update - ${selectedDate}`;
-     });
-
-     // Function to calculate totals for a specific equipment
-     function calculateEquipmentTotals(baseName) {
-         // HMR calculation
-         const hmrOpenInput = document.querySelector(`input[name="hmr_open_${baseName}"]`);
-         const hmrCloseInput = document.querySelector(`input[name="hmr_close_${baseName}"]`);
-         const hmrTotalInput = document.querySelector(`input[name="hmr_total_${baseName}"]`);
-         
-         const hmrOpen = parseFloat(hmrOpenInput.value) || 0;
-         const hmrClose = parseFloat(hmrCloseInput.value) || 0;
-         const hmrTotal = hmrClose >= hmrOpen ? (hmrClose - hmrOpen).toFixed(1) : '';
-         hmrTotalInput.value = hmrTotal;
-
-         // KMR calculation
-         const kmrOpenInput = document.querySelector(`input[name="kmr_open_${baseName}"]`);
-         const kmrCloseInput = document.querySelector(`input[name="kmr_close_${baseName}"]`);
-         const kmrTotalInput = document.querySelector(`input[name="kmr_total_${baseName}"]`);
-         
-         const kmrOpen = parseFloat(kmrOpenInput.value) || 0;
-         const kmrClose = parseFloat(kmrCloseInput.value) || 0;
-         const kmrTotal = kmrClose >= kmrOpen ? (kmrClose - kmrOpen).toFixed(1) : '';
-         kmrTotalInput.value = kmrTotal;
-     }
-
-     // Function to calculate diesel totals
-     function calculateDieselTotals() {
-         let totalDiesel = 0;
-         document.querySelectorAll('input[name^="diesel_"][type="number"]').forEach(dieselInput => {
-             if (!dieselInput.name.includes('total') && !dieselInput.name.includes('opening') && 
-                 !dieselInput.name.includes('closing') && !dieselInput.name.includes('ftd')) {
-                 const value = parseFloat(dieselInput.value);
-                 totalDiesel += isNaN(value) ? 0 : Math.max(0, value);
-             }
-         });
-
-         const dieselIssuedTotal = document.querySelector('input[name="diesel_issued_total"]');
-         const dieselOpening = document.querySelector('input[name="diesel_opening"]');
-         const dieselClosing = document.querySelector('input[name="diesel_closing"]');
-         const dieselFtd = document.querySelector('input[name="diesel_ftd"]');
-
-         dieselIssuedTotal.value = totalDiesel.toFixed(1);
-         const openingStock = parseFloat(dieselOpening.value) || 0;
-         dieselClosing.value = Math.max(0, (openingStock - totalDiesel).toFixed(1));
-         dieselFtd.value = totalDiesel.toFixed(1);
-     }
-
-     // Function to calculate tire totals
-     function calculateTireTotals() {
-         let totalTires = 0;
-         document.querySelectorAll('input[name^="tires_"][type="number"]').forEach(tireInput => {
-             if (!tireInput.name.includes('total') && !tireInput.name.includes('opening') && 
-                 !tireInput.name.includes('closing') && !tireInput.name.includes('ftd')) {
-                 const value = parseInt(tireInput.value);
-                 totalTires += isNaN(value) ? 0 : Math.max(0, value);
-             }
-         });
-
-         const tireIssuedTotal = document.querySelector('input[name="tire_issued_total"]');
-         const tireOpening = document.querySelector('input[name="tire_opening"]');
-         const tireClosing = document.querySelector('input[name="tire_closing"]');
-         const tireFtd = document.querySelector('input[name="tire_ftd"]');
-
-         tireIssuedTotal.value = totalTires;
-         const openingStock = parseInt(tireOpening.value) || 0;
-         tireClosing.value = Math.max(0, openingStock - totalTires);
-         tireFtd.value = totalTires;
-     }
-
-     // Add event listeners
-     document.querySelectorAll('input[type="number"]').forEach(input => {
-         input.addEventListener('input', function() {
-             const name = this.name;
-             
-             if (name.startsWith('hmr_') || name.startsWith('kmr_')) {
-                 const baseName = name.replace('hmr_open_', '')
-                                    .replace('hmr_close_', '')
-                                    .replace('kmr_open_', '')
-                                    .replace('kmr_close_', '');
-                 calculateEquipmentTotals(baseName);
-             }
-             
-             if (name.startsWith('diesel_') && !name.includes('total') && !name.includes('opening') && 
-                 !name.includes('closing') && !name.includes('ftd')) {
-                 calculateDieselTotals();
-             }
-             
-             if (name.startsWith('tires_') && !name.includes('total') && !name.includes('opening') && 
-                 !name.includes('closing') && !name.includes('ftd')) {
-                 calculateTireTotals();
-             }
-             
-             if (name === 'diesel_opening') {
-                 calculateDieselTotals();
-             }
-             
-             if (name === 'tire_opening') {
-                 calculateTireTotals();
-             }
-         });
-     });
-
-     // Submit function
-     function submitReport() {
-         const date = document.querySelector('#update-date').value;
-         if (!date) {
-             alert('Please select a date.');
-             return;
+ // Function to calculate totals for a specific equipment
+ function calculateEquipmentTotals(baseName) {
+     const hmrOpenInput = document.querySelector(`input[name="hmr_open_${baseName}"]`);
+     const hmrCloseInput = document.querySelector(`input[name="hmr_close_${baseName}"]`);
+     const hmrTotalInput = document.querySelector(`input[name="hmr_total_${baseName}"]`);
+     const hmrOpen = parseFloat(hmrOpenInput.value) || 0;
+     const hmrClose = parseFloat(hmrCloseInput.value) || 0;
+     const hmrTotal = hmrClose >= hmrOpen ? (hmrClose - hmrOpen).toFixed(1) : '';
+     hmrTotalInput.value = hmrTotal;
+     const kmrOpenInput = document.querySelector(`input[name="kmr_open_${baseName}"]`);
+     const kmrCloseInput = document.querySelector(`input[name="kmr_close_${baseName}"]`);
+     const kmrTotalInput = document.querySelector(`input[name="kmr_total_${baseName}"]`);
+     const kmrOpen = parseFloat(kmrOpenInput.value) || 0;
+     const kmrClose = parseFloat(kmrCloseInput.value) || 0;
+     const kmrTotal = kmrClose >= kmrOpen ? (kmrClose - kmrOpen).toFixed(1) : '';
+     kmrTotalInput.value = kmrTotal;
+ }
+ // Function to calculate diesel totals
+ function calculateDieselTotals() {
+     let totalDiesel = 0;
+     document.querySelectorAll('input[name^="diesel_"][type="number"]').forEach(dieselInput => {
+         if (!dieselInput.name.includes('total') && !dieselInput.name.includes('opening') &&
+             !dieselInput.name.includes('closing') && !dieselInput.name.includes('ftd')) {
+             const value = parseFloat(dieselInput.value);
+             totalDiesel += isNaN(value) ? 0 : Math.max(0, value);
          }
-
-         // Collect all form data
-         const formData = {
-             date: date,
-             equipment: [],
-             diesel_summary: {
-                 opening: parseFloat(document.querySelector('input[name="diesel_opening"]').value) || 0,
-                 issued_total: parseFloat(document.querySelector('input[name="diesel_issued_total"]').value) || 0,
-                 closing: parseFloat(document.querySelector('input[name="diesel_closing"]').value) || 0,
-                 ftd: parseFloat(document.querySelector('input[name="diesel_ftd"]').value) || 0
-             },
-             tire_summary: {
-                 opening: parseInt(document.querySelector('input[name="tire_opening"]').value) || 0,
-                 issued_total: parseInt(document.querySelector('input[name="tire_issued_total"]').value) || 0,
-                 closing: parseInt(document.querySelector('input[name="tire_closing"]').value) || 0,
-                 ftd: parseInt(document.querySelector('input[name="tire_ftd"]').value) || 0
-             }
-         };
-
-         // Collect equipment data
-         document.querySelectorAll('.equipment-section table tbody tr').forEach(row => {
-             const id = row.cells[0].textContent;
-             const nameParts = id.split(' – ');
-             const baseId = nameParts.length > 1 ? nameParts[1] : id;
-             const data = {
-                 id: id,
-                 hmr_open: parseFloat(row.querySelector(`input[name="hmr_open_${baseId}"]`).value) || 0,
-                 hmr_close: parseFloat(row.querySelector(`input[name="hmr_close_${baseId}"]`).value) || 0,
-                 hmr_total: parseFloat(row.querySelector(`input[name="hmr_total_${baseId}"]`).value) || 0,
-                 kmr_open: parseFloat(row.querySelector(`input[name="kmr_open_${baseId}"]`).value) || 0,
-                 kmr_close: parseFloat(row.querySelector(`input[name="kmr_close_${baseId}"]`).value) || 0,
-                 kmr_total: parseFloat(row.querySelector(`input[name="kmr_total_${baseId}"]`).value) || 0,
-                 diesel: parseFloat(row.querySelector(`input[name="diesel_${baseId}"]`).value) || 0,
-                 tires: parseInt(row.querySelector(`input[name="tires_${baseId}"]`).value) || 0,
-                 remarks: row.querySelector(`input[name="remarks_${baseId}"]`).value || ''
-             };
-             formData.equipment.push(data);
-         });
-
-         console.log('Form Data:', formData);
-         alert('Report submitted successfully!');
-         // Add actual submission logic here (e.g., send to server via fetch)
-     }
-
-     // View Breakdown Report function
-     function viewBreakdownReport() {
-         alert('Opening MIS Report for equipment breakdowns...');
-         // Add actual logic to open/show the MIS report here
-     }
+     });
+     const dieselIssuedTotal = document.querySelector('input[name="diesel_issued_total"]');
+     const dieselOpening = document.querySelector('input[name="diesel_opening"]');
+     const dieselClosing = document.querySelector('input[name="diesel_closing"]');
+     const dieselFtd = document.querySelector('input[name="diesel_ftd"]');
+     dieselIssuedTotal.value = totalDiesel.toFixed(1);
+     const openingStock = parseFloat(dieselOpening.value) || 0;
+     dieselClosing.value = Math.max(0, (openingStock - totalDiesel).toFixed(1));
+     dieselFtd.value = totalDiesel.toFixed(1);
+ }
+ // Function to calculate tire totals
+ function calculateTireTotals() {
+     let totalTires = 0;
+     document.querySelectorAll('input[name^="tires_"][type="number"]').forEach(tireInput => {
+         if (!tireInput.name.includes('total') && !tireInput.name.includes('opening') &&
+             !tireInput.name.includes('closing') && !tireInput.name.includes('ftd')) {
+             const value = parseInt(tireInput.value);
+             totalTires += isNaN(value) ? 0 : Math.max(0, value);
+         }
+     });
+     const tireIssuedTotal = document.querySelector('input[name="tire_issued_total"]');
+     const tireOpening = document.querySelector('input[name="tire_opening"]');
+     const tireClosing = document.querySelector('input[name="tire_closing"]');
+     const tireFtd = document.querySelector('input[name="tire_ftd"]');
+     tireIssuedTotal.value = totalTires;
+     const openingStock = parseInt(tireOpening.value) || 0;
+     tireClosing.value = Math.max(0, openingStock - totalTires);
+     tireFtd.value = totalTires;
+ }
+ // Add event listeners
+ document.querySelectorAll('input[type="number"]').forEach(input => {
+     input.addEventListener('input', function() {
+         const name = this.name;
+         if (name.startsWith('hmr_') || name.startsWith('kmr_')) {
+             const baseName = name.replace('hmr_open_', '')
+                                .replace('hmr_close_', '')
+                                .replace('kmr_open_', '')
+                                .replace('kmr_close_', '');
+             calculateEquipmentTotals(baseName);
+         }
+         if (name.startsWith('diesel_') && !name.includes('total') && !name.includes('opening') &&
+             !name.includes('closing') && !name.includes('ftd')) {
+             calculateDieselTotals();
+         }
+         if (name.startsWith('tires_') && !name.includes('total') && !name.includes('opening') &&
+             !name.includes('closing') && !name.includes('ftd')) {
+             calculateTireTotals();
+         }
+         if (name === 'diesel_opening') {
+             calculateDieselTotals();
+         }
+         if (name === 'tire_opening') {
+             calculateTireTotals();
+         }
+     });
  });
+ // Submit function
+ function submitReport() {
+     const formData = {
+         equipment: [],
+         diesel_summary: {
+             opening: parseFloat(document.querySelector('input[name="diesel_opening"]').value) || 0,
+             issued_total: parseFloat(document.querySelector('input[name="diesel_issued_total"]').value) || 0,
+             closing: parseFloat(document.querySelector('input[name="diesel_closing"]').value) || 0,
+             ftd: parseFloat(document.querySelector('input[name="diesel_ftd"]').value) || 0
+         },
+         tire_summary: {
+             opening: parseInt(document.querySelector('input[name="tire_opening"]').value) || 0,
+             issued_total: parseInt(document.querySelector('input[name="tire_issued_total"]').value) || 0,
+             closing: parseInt(document.querySelector('input[name="tire_closing"]').value) || 0,
+             ftd: parseInt(document.querySelector('input[name="tire_ftd"]').value) || 0
+         }
+     };
+     document.querySelectorAll('.equipment-section table tbody tr').forEach(row => {
+         const id = row.cells[0].textContent;
+         const nameParts = id.split(' – ');
+         const baseId = nameParts.length > 1 ? nameParts[1] : id;
+         const data = {
+             id: id,
+             hmr_open: parseFloat(row.querySelector(`input[name="hmr_open_${baseId}"]`).value) || 0,
+             hmr_close: parseFloat(row.querySelector(`input[name="hmr_close_${baseId}"]`).value) || 0,
+             hmr_total: parseFloat(row.querySelector(`input[name="hmr_total_${baseId}"]`).value) || 0,
+             kmr_open: parseFloat(row.querySelector(`input[name="kmr_open_${baseId}"]`).value) || 0,
+             kmr_close: parseFloat(row.querySelector(`input[name="kmr_close_${baseId}"]`).value) || 0,
+             kmr_total: parseFloat(row.querySelector(`input[name="kmr_total_${baseId}"]`).value) || 0,
+             diesel: parseFloat(row.querySelector(`input[name="diesel_${baseId}"]`).value) || 0,
+             tires: parseInt(row.querySelector(`input[name="tires_${baseId}"]`).value) || 0,
+             remarks: row.querySelector(`input[name="remarks_${baseId}"]`).value || ''
+         };
+         formData.equipment.push(data);
+     });
+     console.log('Form Data:', formData);
+     alert('Report submitted successfully!');
+ }
  </script>
 </body>
 </html>
