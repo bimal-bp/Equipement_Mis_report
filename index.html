@@ -80,30 +80,35 @@
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .submit-btn {
             background-color: #4CAF50;
         }
         .submit-btn:hover {
             background-color: #45a049;
+            transform: translateY(-2px);
         }
         .print-btn {
             background-color: #f39c12;
         }
         .print-btn:hover {
             background-color: #e67e22;
+            transform: translateY(-2px);
         }
         .payment-btn {
             background-color: #3498db;
         }
         .payment-btn:hover {
             background-color: #2980b9;
+            transform: translateY(-2px);
         }
         .download-btn {
             background-color: #9b59b6;
         }
         .download-btn:hover {
             background-color: #8e44ad;
+            transform: translateY(-2px);
         }
         .status-section {
             background: linear-gradient(135deg, #2c3e50, #34495e);
@@ -310,7 +315,7 @@
                 <div class="status-card">
                     <h3>Maintenance Status</h3>
                     <div class="status-item">Total Maintenance Cost Today: <strong id="maintenance-total">₹0.00</strong></div>
-                    <div class="status-item">Scheduled Maintenance: <strong>2 Vehicles</strong></div>
+                    <div class="status-item">Show Diesel Payment: <strong id="diesel-payment-total">₹67000.00 | 550.0 L</strong></div>
                 </div>
             </div>
         </div>
@@ -338,9 +343,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Tipper rows with added maintenance and puncture fields -->
                     <tr>
-                        <td>AP39UQ0095</td>
+                        <td>TIPPER-1 – AP39UQ0095</td>
                         <td><input type="number" step="0.1" name="hmr_open_AP39UQ0095"></td>
                         <td><input type="number" step="0.1" name="hmr_close_AP39UQ0095"></td>
                         <td><input type="number" step="0.1" name="hmr_total_AP39UQ0095" readonly></td>
@@ -355,7 +359,198 @@
                         <td><input type="text" name="maintenance_remarks_AP39UQ0095"></td>
                         <td><input type="text" name="remarks_AP39UQ0095"></td>
                     </tr>
-                    <!-- Additional tipper rows would follow the same pattern -->
+                    <tr>
+                        <td>TIPPER-2 – AP39UQ0097</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UQ0097" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UQ0097" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39UQ0097"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39UQ0097"></td>
+                        <td><input type="number" name="tires_AP39UQ0097"></td>
+                        <td><input type="number" name="punctures_AP39UQ0097" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39UQ0097"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39UQ0097"></td>
+                        <td><input type="text" name="remarks_AP39UQ0097"></td>
+                    </tr>
+                    <tr>
+                        <td>TIPPER-3 – AP39UW9880</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UW9880"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UW9880"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UW9880" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UW9880"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UW9880"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UW9880" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39UW9880"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39UW9880"></td>
+                        <td><input type="number" name="tires_AP39UW9880"></td>
+                        <td><input type="number" name="punctures_AP39UW9880" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39UW9880"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39UW9880"></td>
+                        <td><input type="text" name="remarks_AP39UW9880"></td>
+                    </tr>
+                    <tr>
+                        <td>TIPPER-4 – AP39UW9881</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UW9881"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UW9881"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UW9881" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UW9881"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UW9881"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UW9881" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39UW9881"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39UW9881"></td>
+                        <td><input type="number" name="tires_AP39UW9881"></td>
+                        <td><input type="number" name="punctures_AP39UW9881" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39UW9881"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39UW9881"></td>
+                        <td><input type="text" name="remarks_AP39UW9881"></td>
+                    </tr>
+                    <tr>
+                        <td>TIPPER-5 – AP39UY4652</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UY4652"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UY4652"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UY4652" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UY4652"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UY4652"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UY4652" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39UY4652"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39UY4652"></td>
+                        <td><input type="number" name="tires_AP39UY4652"></td>
+                        <td><input type="number" name="punctures_AP39UY4652" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39UY4652"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39UY4652"></td>
+                        <td><input type="text" name="remarks_AP39UY4652"></td>
+                    </tr>
+                    <tr>
+                        <td>TIPPER-6 – AP39UY4654</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39UY4654"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39UY4654"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39UY4654" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39UY4654"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39UY4654"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39UY4654" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39UY4654"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39UY4654"></td>
+                        <td><input type="number" name="tires_AP39UY4654"></td>
+                        <td><input type="number" name="punctures_AP39UY4654" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39UY4654"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39UY4654"></td>
+                        <td><input type="text" name="remarks_AP39UY4654"></td>
+                    </tr>
+                    <tr>
+                        <td>TIPPER-7 – AP39WC0924</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39WC0924"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39WC0924"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39WC0924" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39WC0924"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39WC0924"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39WC0924" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39WC0924"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39WC0924"></td>
+                        <td><input type="number" name="tires_AP39WC0924"></td>
+                        <td><input type="number" name="punctures_AP39WC0924" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39WC0924"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39WC0924"></td>
+                        <td><input type="text" name="remarks_AP39WC0924"></td>
+                    </tr>
+                    <tr>
+                        <td>TIPPER-8 – AP39WC0927</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39WC0927"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39WC0927"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39WC0927" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39WC0927"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39WC0927"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39WC0927" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39WC0927"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39WC0927"></td>
+                        <td><input type="number" name="tires_AP39WC0927"></td>
+                        <td><input type="number" name="punctures_AP39WC0927" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39WC0927"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39WC0927"></td>
+                        <td><input type="text" name="remarks_AP39WC0927"></td>
+                    </tr>
+                    <tr>
+                        <td>TIPPER-9 – AP39WC0928</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39WC0928"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39WC0928"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39WC0928" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39WC0928"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39WC0928"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39WC0928" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39WC0928"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39WC0928"></td>
+                        <td><input type="number" name="tires_AP39WC0928"></td>
+                        <td><input type="number" name="punctures_AP39WC0928" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39WC0928"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39WC0928"></td>
+                        <td><input type="text" name="remarks_AP39WC0928"></td>
+                    </tr>
+                    <tr>
+                        <td>TIPPER-10 – AP39WF2057</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39WF2057"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39WF2057"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39WF2057" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39WF2057"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39WF2057"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39WF2057" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39WF2057"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39WF2057"></td>
+                        <td><input type="number" name="tires_AP39WF2057"></td>
+                        <td><input type="number" name="punctures_AP39WF2057" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39WF2057"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39WF2057"></td>
+                        <td><input type="text" name="remarks_AP39WF2057"></td>
+                    </tr>
+                    <tr>
+                        <td>TIPPER-11 – AP39WF2058</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39WF2058"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39WF2058"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39WF2058" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39WF2058"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39WF2058"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39WF2058" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39WF2058"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39WF2058"></td>
+                        <td><input type="number" name="tires_AP39WF2058"></td>
+                        <td><input type="number" name="punctures_AP39WF2058" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39WF2058"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39WF2058"></td>
+                        <td><input type="text" name="remarks_AP39WF2058"></td>
+                    </tr>
+                    <tr>
+                        <td>TIPPER-12 – AP39WF2059</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39WF2059"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39WF2059"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39WF2059" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39WF2059"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39WF2059"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39WF2059" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39WF2059"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39WF2059"></td>
+                        <td><input type="number" name="tires_AP39WF2059"></td>
+                        <td><input type="number" name="punctures_AP39WF2059" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39WF2059"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39WF2059"></td>
+                        <td><input type="text" name="remarks_AP39WF2059"></td>
+                    </tr>
+                    <tr>
+                        <td>TATA Water Tanker 2825.K – JH08H8146</td>
+                        <td><input type="number" step="0.1" name="hmr_open_JH08H8146"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_JH08H8146"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_JH08H8146" readonly></td>
+                        <td><input type="number" step="0.1" name="kmr_open_JH08H8146"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_JH08H8146"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_JH08H8146" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_JH08H8146"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_JH08H8146"></td>
+                        <td><input type="number" name="tires_JH08H8146"></td>
+                        <td><input type="number" name="punctures_JH08H8146" min="0" value="0"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_JH08H8146"></td>
+                        <td><input type="text" name="maintenance_remarks_JH08H8146"></td>
+                        <td><input type="text" name="remarks_JH08H8146"></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -378,7 +573,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Excavator/Loader rows with added maintenance fields -->
                     <tr>
                         <td>SDLG Loader-1 (L936H) 61051 – AP39NM9710</td>
                         <td><input type="number" step="0.1" name="hmr_open_AP39NM9710"></td>
@@ -390,7 +584,105 @@
                         <td><input type="text" name="maintenance_remarks_AP39NM9710"></td>
                         <td><input type="text" name="remarks_AP39NM9710"></td>
                     </tr>
-                    <!-- Additional excavator/loader rows would follow the same pattern -->
+                    <tr>
+                        <td>SDLG Loader-2 (L936H) 61054 – AP39NM9711</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39NM9711"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39NM9711"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39NM9711" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39NM9711"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39NM9711"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39NM9711"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39NM9711"></td>
+                        <td><input type="text" name="remarks_AP39NM9711"></td>
+                    </tr>
+                    <tr>
+                        <td>Volvo Excavator EC210 OLD – AP39TV0962</td>
+                        <td><input type="number" step="0.1" name="hmr_open_AP39TV0962"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_AP39TV0962"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_AP39TV0962" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39TV0962"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39TV0962"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39TV0962"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39TV0962"></td>
+                        <td><input type="text" name="remarks_AP39TV0962"></td>
+                    </tr>
+                    <tr>
+                        <td>Volvo Excavator EC210DL NEW – SLNO123</td>
+                        <td><input type="number" step="0.1" name="hmr_open_SLNO123"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_SLNO123"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_SLNO123" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_SLNO123"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_SLNO123"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_SLNO123"></td>
+                        <td><input type="text" name="maintenance_remarks_SLNO123"></td>
+                        <td><input type="text" name="remarks_SLNO123"></td>
+                    </tr>
+                    <tr>
+                        <td>VOLVO Excavator-1 (KMH-1) – GOVIND</td>
+                        <td><input type="number" step="0.1" name="hmr_open_GOVIND1"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_GOVIND1"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_GOVIND1" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_GOVIND1"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_GOVIND1"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_GOVIND1"></td>
+                        <td><input type="text" name="maintenance_remarks_GOVIND1"></td>
+                        <td><input type="text" name="remarks_GOVIND1"></td>
+                    </tr>
+                    <tr>
+                        <td>VOLVO Excavator-2 (KMH-1) – GOVIND</td>
+                        <td><input type="number" step="0.1" name="hmr_open_GOVIND2"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_GOVIND2"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_GOVIND2" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_GOVIND2"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_GOVIND2"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_GOVIND2"></td>
+                        <td><input type="text" name="maintenance_remarks_GOVIND2"></td>
+                        <td><input type="text" name="remarks_GOVIND2"></td>
+                    </tr>
+                    <tr>
+                        <td>JCB Excavator – PLANT-RENTAL</td>
+                        <td><input type="number" step="0.1" name="hmr_open_PLANTRENTAL"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_PLANTRENTAL"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_PLANTRENTAL" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_PLANTRENTAL"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_PLANTRENTAL"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_PLANTRENTAL"></td>
+                        <td><input type="text" name="maintenance_remarks_PLANTRENTAL"></td>
+                        <td><input type="text" name="remarks_PLANTRENTAL"></td>
+                    </tr>
+                    <tr>
+                        <td>Hyundai Excavator – QUARRY-RENTAL</td>
+                        <td><input type="number" step="0.1" name="hmr_open_QUARRYRENTAL1"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_QUARRYRENTAL1"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_QUARRYRENTAL1" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_QUARRYRENTAL1"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_QUARRYRENTAL1"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_QUARRYRENTAL1"></td>
+                        <td><input type="text" name="maintenance_remarks_QUARRYRENTAL1"></td>
+                        <td><input type="text" name="remarks_QUARRYRENTAL1"></td>
+                    </tr>
+                    <tr>
+                        <td>Rental - BEML BD50 Dozer – QUARRY-RENTAL</td>
+                        <td><input type="number" step="0.1" name="hmr_open_QUARRYRENTAL2"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_QUARRYRENTAL2"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_QUARRYRENTAL2" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_QUARRYRENTAL2"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_QUARRYRENTAL2"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_QUARRYRENTAL2"></td>
+                        <td><input type="text" name="maintenance_remarks_QUARRYRENTAL2"></td>
+                        <td><input type="text" name="remarks_QUARRYRENTAL2"></td>
+                    </tr>
+                    <tr>
+                        <td>D.G 62.5KVA KIRLOSKAR</td>
+                        <td><input type="number" step="0.1" name="hmr_open_DG625KVA"></td>
+                        <td><input type="number" step="0.1" name="hmr_close_DG625KVA"></td>
+                        <td><input type="number" step="0.1" name="hmr_total_DG625KVA" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_DG625KVA"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_DG625KVA"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_DG625KVA"></td>
+                        <td><input type="text" name="maintenance_remarks_DG625KVA"></td>
+                        <td><input type="text" name="remarks_DG625KVA"></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -413,7 +705,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Bolero/Scorpio rows with added maintenance fields -->
                     <tr>
                         <td>Bolero - Camper Gold BS6 – AP39TM9139</td>
                         <td><input type="number" step="0.1" name="kmr_open_AP39TM9139"></td>
@@ -425,7 +716,61 @@
                         <td><input type="text" name="maintenance_remarks_AP39TM9139"></td>
                         <td><input type="text" name="remarks_AP39TM9139"></td>
                     </tr>
-                    <!-- Additional Bolero/Scorpio rows would follow the same pattern -->
+                    <tr>
+                        <td>Bolero - Camper Gold BS6 – AP39TM9171</td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP39TM9171"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP39TM9171"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP39TM9171" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP39TM9171"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP39TM9171"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP39TM9171"></td>
+                        <td><input type="text" name="maintenance_remarks_AP39TM9171"></td>
+                        <td><input type="text" name="remarks_AP39TM9171"></td>
+                    </tr>
+                    <tr>
+                        <td>Scorpio BS4 – AP31CE0948</td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP31CE0948"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP31CE0948"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP31CE0948" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP31CE0948"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP31CE0948"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP31CE0948"></td>
+                        <td><input type="text" name="maintenance_remarks_AP31CE0948"></td>
+                        <td><input type="text" name="remarks_AP31CE0948"></td>
+                    </tr>
+                    <tr>
+                        <td>Bolero – AP31CW8895</td>
+                        <td><input type="number" step="0.1" name="kmr_open_AP31CW8895"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AP31CW8895"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AP31CW8895" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AP31CW8895"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AP31CW8895"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AP31CW8895"></td>
+                        <td><input type="text" name="maintenance_remarks_AP31CW8895"></td>
+                        <td><input type="text" name="remarks_AP31CW8895"></td>
+                    </tr>
+                    <tr>
+                        <td>Scorpio Arun sir – TBD</td>
+                        <td><input type="number" step="0.1" name="kmr_open_ARUNSIR"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_ARUNSIR"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_ARUNSIR" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_ARUNSIR"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_ARUNSIR"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_ARUNSIR"></td>
+                        <td><input type="text" name="maintenance_remarks_ARUNSIR"></td>
+                        <td><input type="text" name="remarks_ARUNSIR"></td>
+                    </tr>
+                    <tr>
+                        <td>Scorpio AK sir – TBD</td>
+                        <td><input type="number" step="0.1" name="kmr_open_AKSIR"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_AKSIR"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_AKSIR" readonly></td>
+                        <td><input type="number" step="0.1" name="diesel_qty_AKSIR"></td>
+                        <td><input type="number" step="0.1" name="diesel_cost_AKSIR"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_AKSIR"></td>
+                        <td><input type="text" name="maintenance_remarks_AKSIR"></td>
+                        <td><input type="text" name="remarks_AKSIR"></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -448,9 +793,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Bike rows with added maintenance fields -->
                     <tr>
-                        <td>Quarry Bike</td>
+                        <td>Quarry Bike – TBD</td>
                         <td><input type="number" step="0.1" name="kmr_open_QUARRYBIKE"></td>
                         <td><input type="number" step="0.1" name="kmr_close_QUARRYBIKE"></td>
                         <td><input type="number" step="0.1" name="kmr_total_QUARRYBIKE" readonly></td>
@@ -460,7 +804,28 @@
                         <td><input type="text" name="maintenance_remarks_QUARRYBIKE"></td>
                         <td><input type="text" name="remarks_QUARRYBIKE"></td>
                     </tr>
-                    <!-- Additional bike rows would follow the same pattern -->
+                    <tr>
+                        <td>Dispatch Weight Bike – TBD</td>
+                        <td><input type="number" step="0.1" name="kmr_open_DISPATCHBIKE"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_DISPATCHBIKE"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_DISPATCHBIKE" readonly></td>
+                        <td><input type="number" step="0.1" name="petrol_qty_DISPATCHBIKE"></td>
+                        <td><input type="number" step="0.1" name="petrol_cost_DISPATCHBIKE"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_DISPATCHBIKE"></td>
+                        <td><input type="text" name="maintenance_remarks_DISPATCHBIKE"></td>
+                        <td><input type="text" name="remarks_DISPATCHBIKE"></td>
+                    </tr>
+                    <tr>
+                        <td>Office Room Bike – TBD</td>
+                        <td><input type="number" step="0.1" name="kmr_open_OFFICEBIKE"></td>
+                        <td><input type="number" step="0.1" name="kmr_close_OFFICEBIKE"></td>
+                        <td><input type="number" step="0.1" name="kmr_total_OFFICEBIKE" readonly></td>
+                        <td><input type="number" step="0.1" name="petrol_qty_OFFICEBIKE"></td>
+                        <td><input type="number" step="0.1" name="petrol_cost_OFFICEBIKE"></td>
+                        <td><input type="number" step="0.1" name="maintenance_cost_OFFICEBIKE"></td>
+                        <td><input type="text" name="maintenance_remarks_OFFICEBIKE"></td>
+                        <td><input type="text" name="remarks_OFFICEBIKE"></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -580,7 +945,7 @@
         <button type="button" class="submit-btn" onclick="submitReport()">Submit Daily Report</button>
         <button type="button" class="print-btn" onclick="printReport()">Print PDF</button>
         <button type="button" class="download-btn" onclick="downloadPDF()">Download Full Report</button>
-        <button type="button" class="payment-btn" id="showPaymentBtn" onclick="showPayment()">Show Diesel Payment</button>
+        <button type="button" class="payment-btn" id="showPaymentBtn" onclick="showPayment()">Show Diesel Payment (₹67000.00 | 550.0 L)</button>
     </div>
 
     <script>
@@ -599,6 +964,7 @@
             const totalQuantity = dieselPayments.reduce((sum, payment) => sum + payment.quantity, 0);
             document.getElementById('paymentTotal').textContent = `Total Diesel Payment: ₹${totalAmount.toFixed(2)} | Total Quantity: ${totalQuantity.toFixed(1)} Liters`;
             document.getElementById('showPaymentBtn').textContent = `Show Diesel Payment (₹${totalAmount.toFixed(2)} | ${totalQuantity.toFixed(1)} L)`;
+            document.getElementById('diesel-payment-total').textContent = `₹${totalAmount.toFixed(2)} | ${totalQuantity.toFixed(1)} L`;
         }
 
         // Function to add a new payment
@@ -778,176 +1144,4 @@
             alert(`Total Diesel Payment: ₹${totalAmount.toFixed(2)}\nTotal Quantity: ${totalQuantity.toFixed(1)} Liters`);
         }
 
-        // Function to print report as PDF
-        function printReport() {
-            window.print();
-        }
-
-        // Function to download comprehensive PDF report
-        function downloadPDF() {
-            const doc = new jsPDF();
-            let yPosition = 20;
-            
-            // Report title
-            doc.setFontSize(20);
-            doc.text("Daily Equipment Report", 105, yPosition, { align: "center" });
-            yPosition += 15;
-            
-            // Date
-            doc.setFontSize(12);
-            doc.text(`Report Date: ${new Date().toLocaleDateString()}`, 14, yPosition);
-            yPosition += 10;
-            
-            // Status summary
-            doc.setFontSize(16);
-            doc.text("Equipment Status Summary", 14, yPosition);
-            yPosition += 10;
-            
-            doc.setFontSize(12);
-            const fuelStock = document.querySelector('.status-item strong').textContent;
-            const tiresInStock = document.querySelectorAll('.status-item strong')[1].textContent;
-            const punctures = document.getElementById('puncture-count').textContent;
-            const maintenanceTotal = document.getElementById('maintenance-total').textContent;
-            
-            doc.text(`Fuel Stock: ${fuelStock}`, 20, yPosition);
-            yPosition += 7;
-            doc.text(`Tires in Stock: ${tiresInStock}`, 20, yPosition);
-            yPosition += 7;
-            doc.text(`Punctures Today: ${punctures}`, 20, yPosition);
-            yPosition += 7;
-            doc.text(`Maintenance Cost: ${maintenanceTotal}`, 20, yPosition);
-            yPosition += 15;
-            
-            // Cost summary
-            doc.setFontSize(16);
-            doc.text("Cost Summary", 14, yPosition);
-            yPosition += 10;
-            
-            doc.setFontSize(12);
-            const dieselQty = document.getElementById('diesel-total-qty').textContent;
-            const dieselCost = document.getElementById('diesel-total-cost').textContent;
-            const petrolQty = document.getElementById('petrol-total-qty').textContent;
-            const petrolCost = document.getElementById('petrol-total-cost').textContent;
-            
-            doc.text(`Diesel: ${dieselQty} (${dieselCost})`, 20, yPosition);
-            yPosition += 7;
-            doc.text(`Petrol: ${petrolQty} (${petrolCost})`, 20, yPosition);
-            yPosition += 7;
-            doc.text(`Maintenance: ${maintenanceTotal}`, 20, yPosition);
-            yPosition += 15;
-            
-            // Add a page for equipment details if needed
-            doc.addPage();
-            yPosition = 20;
-            doc.setFontSize(16);
-            doc.text("Equipment Details", 14, yPosition);
-            yPosition += 10;
-            
-            // This would need to be expanded to include all equipment data in table format
-            doc.setFontSize(10);
-            doc.text("Detailed equipment data would be listed here in table format.", 14, yPosition);
-            
-            // Save the PDF
-            doc.save(`Equipment_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
-        }
-
-        // Add event listeners
-        document.querySelectorAll('input[type="number"], input[type="text"]').forEach(input => {
-            input.addEventListener('input', function() {
-                const name = this.name;
-                
-                if (name.startsWith('hmr_') || name.startsWith('kmr_')) {
-                    const baseName = name.replace('hmr_open_', '')
-                                       .replace('hmr_close_', '')
-                                       .replace('kmr_open_', '')
-                                       .replace('kmr_close_', '');
-                    calculateEquipmentTotals(baseName);
-                }
-                
-                if (name.startsWith('diesel_') || name.startsWith('petrol_') || 
-                    name.startsWith('maintenance_') || name.startsWith('tires_') || 
-                    name.startsWith('punctures_')) {
-                    updateCostSummaries();
-                }
-                
-                if (name === 'diesel_opening' || name === 'tire_opening') {
-                    updateCostSummaries();
-                }
-            });
-        });
-
-        // Submit function
-        function submitReport() {
-            const formData = {
-                equipment: [],
-                diesel_summary: {
-                    opening: parseFloat(document.querySelector('input[name="diesel_opening"]').value) || 0,
-                    issued_total: parseFloat(document.querySelector('input[name="diesel_issued_total"]').value) || 0,
-                    closing: parseFloat(document.querySelector('input[name="diesel_closing"]').value) || 0,
-                    ftd: parseFloat(document.querySelector('input[name="diesel_ftd"]').value) || 0
-                },
-                tire_summary: {
-                    opening: parseInt(document.querySelector('input[name="tire_opening"]').value) || 0,
-                    issued_total: parseInt(document.querySelector('input[name="tire_issued_total"]').value) || 0,
-                    closing: parseInt(document.querySelector('input[name="tire_closing"]').value) || 0,
-                    ftd: parseInt(document.querySelector('input[name="tire_ftd"]').value) || 0
-                },
-                petrol_summary: {
-                    issued_total: parseFloat(document.querySelector('input[name="petrol_issued_total"]').value) || 0,
-                    cost_total: parseFloat(document.querySelector('input[name="petrol_cost_total"]').value) || 0
-                },
-                breakdown_status: {
-                    tipper1: document.querySelector('input[name="breakdown_tipper1"]').value || '',
-                    tipper2: document.querySelector('input[name="breakdown_tipper2"]').value || '',
-                    loader: document.querySelector('input[name="breakdown_loader"]').value || ''
-                },
-                cost_summary: {
-                    diesel_qty: parseFloat(document.getElementById('diesel-total-qty').textContent) || 0,
-                    diesel_cost: parseFloat(document.getElementById('diesel-total-cost').textContent.replace('₹', '')) || 0,
-                    petrol_qty: parseFloat(document.getElementById('petrol-total-qty').textContent) || 0,
-                    petrol_cost: parseFloat(document.getElementById('petrol-total-cost').textContent.replace('₹', '')) || 0,
-                    maintenance: parseFloat(document.getElementById('maintenance-summary-cost').textContent.replace('₹', '')) || 0,
-                    tires: parseInt(document.getElementById('tires-total').textContent) || 0,
-                    punctures: parseInt(document.getElementById('punctures-total').textContent) || 0
-                },
-                diesel_payments: dieselPayments
-            };
-
-            // Collect equipment data
-            document.querySelectorAll('.equipment-section table tbody tr').forEach(row => {
-                const id = row.cells[0].textContent;
-                const nameParts = id.split(' – ');
-                const baseId = nameParts.length > 1 ? nameParts[1] : id.replace(/[^a-zA-Z0-9]/g, '');
-                
-                const data = {
-                    id: id,
-                    hmr_open: parseFloat(row.querySelector(`input[name="hmr_open_${baseId}"]`)?.value) || 0,
-                    hmr_close: parseFloat(row.querySelector(`input[name="hmr_close_${baseId}"]`)?.value) || 0,
-                    hmr_total: parseFloat(row.querySelector(`input[name="hmr_total_${baseId}"]`)?.value) || 0,
-                    kmr_open: parseFloat(row.querySelector(`input[name="kmr_open_${baseId}"]`)?.value) || 0,
-                    kmr_close: parseFloat(row.querySelector(`input[name="kmr_close_${baseId}"]`)?.value) || 0,
-                    kmr_total: parseFloat(row.querySelector(`input[name="kmr_total_${baseId}"]`)?.value) || 0,
-                    diesel_qty: parseFloat(row.querySelector(`input[name="diesel_qty_${baseId}"]`)?.value) || 0,
-                    diesel_cost: parseFloat(row.querySelector(`input[name="diesel_cost_${baseId}"]`)?.value) || 0,
-                    petrol_qty: parseFloat(row.querySelector(`input[name="petrol_qty_${baseId}"]`)?.value) || 0,
-                    petrol_cost: parseFloat(row.querySelector(`input[name="petrol_cost_${baseId}"]`)?.value) || 0,
-                    tires: parseInt(row.querySelector(`input[name="tires_${baseId}"]`)?.value) || 0,
-                    punctures: parseInt(row.querySelector(`input[name="punctures_${baseId}"]`)?.value) || 0,
-                    maintenance_cost: parseFloat(row.querySelector(`input[name="maintenance_cost_${baseId}"]`)?.value) || 0,
-                    maintenance_remarks: row.querySelector(`input[name="maintenance_remarks_${baseId}"]`)?.value || '',
-                    remarks: row.querySelector(`input[name="remarks_${baseId}"]`)?.value || ''
-                };
-                
-                formData.equipment.push(data);
-            });
-
-            console.log('Form Data:', formData);
-            alert('Report submitted successfully!');
-        }
-
-        // Initialize payment total on page load
-        updatePaymentTotal();
-        updateCostSummaries();
-    </script>
-</body>
-</html>
+        // Function to print report as
